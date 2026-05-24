@@ -19,13 +19,14 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '17'
-        cache: 'gradle'
 
-    - name: Grant Execute Permission for Gradlew
-      run: chmod +x gradlew
+    - name: Setup Gradle (No Wrapper Required!)
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: 8.2
 
-    - name: Build Debug APK with Gradle
-      run: ./gradlew assembleDebug
+    - name: Build Debug APK with Global Gradle
+      run: gradle assembleDebug
 
     - name: Upload Finished APK
       uses: actions/upload-artifact@v4
